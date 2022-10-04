@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EngineersMatrimonyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Aid" />
+          </Key>
+          <Property Name="Aid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="IntID" />
+          </Key>
+          <Property Name="IntID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FromId" Type="int" />
+          <Property Name="ToId" Type="int" />
+          <Property Name="MatchScore" Type="int" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Preference">
+          <Key>
+            <PropertyRef Name="PrefID" />
+          </Key>
+          <Property Name="PrefID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MID" Type="int" />
+          <Property Name="AgeFrom" Type="int" Nullable="false" />
+          <Property Name="AgeTo" Type="int" Nullable="false" />
+          <Property Name="HeightFrom" Type="float" Nullable="false" />
+          <Property Name="HeightTo" Type="float" Nullable="false" />
+          <Property Name="WeightFrom" Type="float" Nullable="false" />
+          <Property Name="WeightTo" Type="float" Nullable="false" />
+          <Property Name="Job" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IncomeFrom" Type="float" />
+          <Property Name="IncomeTo" Type="float" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="RegID" />
+          </Key>
+          <Property Name="RegID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MID" Type="int" />
+          <Property Name="PName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Education" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Weight" Type="float" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="50" />
+          <Property Name="MStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Photo2" Type="nvarchar(max)" />
+          <Property Name="Photo3" Type="nvarchar(max)" />
+          <Property Name="FamilyType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnnualIncome" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Basic_Profile">
+          <Key>
+            <PropertyRef Name="DOB" />
+            <PropertyRef Name="District" />
+            <PropertyRef Name="Photo1" />
+          </Key>
+          <Property Name="MID" Type="int" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="District" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo1" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Interest__FromId__2E1BDC42">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Interest">
+              <PropertyRef Name="FromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interest__ToId__2F10007B">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Interest">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Preference__MID__32E0915F">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Preference" Type="Self.Preference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Preference">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profile__MID__276EDEB3">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EngineersMatrimonyModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Interest" EntityType="Self.Interest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Preference" EntityType="Self.Preference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Basic_Profile" EntityType="Self.Basic_Profile" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Basic_Profile].[MID] AS [MID], 
+    [Basic_Profile].[DOB] AS [DOB], 
+    [Basic_Profile].[District] AS [District], 
+    [Basic_Profile].[Photo1] AS [Photo1]
+    FROM [dbo].[Basic_Profile] AS [Basic_Profile]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Interest__FromId__2E1BDC42" Association="Self.FK__Interest__FromId__2E1BDC42">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Interest" EntitySet="Interest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interest__ToId__2F10007B" Association="Self.FK__Interest__ToId__2F10007B">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Interest" EntitySet="Interest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Preference__MID__32E0915F" Association="Self.FK__Preference__MID__32E0915F">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Preference" EntitySet="Preference" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profile__MID__276EDEB3" Association="Self.FK__Profile__MID__276EDEB3">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EngineersMatrimonyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Interests" Relationship="Self.FK__Interest__FromId__2E1BDC42" FromRole="Account" ToRole="Interest" />
+          <NavigationProperty Name="Interests1" Relationship="Self.FK__Interest__ToId__2F10007B" FromRole="Account" ToRole="Interest" />
+          <NavigationProperty Name="Preferences" Relationship="Self.FK__Preference__MID__32E0915F" FromRole="Account" ToRole="Preference" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK__Profile__MID__276EDEB3" FromRole="Account" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Aid" />
+          </Key>
+          <Property Name="Aid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Interest">
+          <Key>
+            <PropertyRef Name="IntID" />
+          </Key>
+          <Property Name="IntID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FromId" Type="Int32" />
+          <Property Name="ToId" Type="Int32" />
+          <Property Name="MatchScore" Type="Int32" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Interest__FromId__2E1BDC42" FromRole="Interest" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK__Interest__ToId__2F10007B" FromRole="Interest" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Preference">
+          <Key>
+            <PropertyRef Name="PrefID" />
+          </Key>
+          <Property Name="PrefID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MID" Type="Int32" />
+          <Property Name="AgeFrom" Type="Int32" Nullable="false" />
+          <Property Name="AgeTo" Type="Int32" Nullable="false" />
+          <Property Name="HeightFrom" Type="Double" Nullable="false" />
+          <Property Name="HeightTo" Type="Double" Nullable="false" />
+          <Property Name="WeightFrom" Type="Double" Nullable="false" />
+          <Property Name="WeightTo" Type="Double" Nullable="false" />
+          <Property Name="Job" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FamilyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IncomeFrom" Type="Double" />
+          <Property Name="IncomeTo" Type="Double" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Preference__MID__32E0915F" FromRole="Preference" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="RegID" />
+          </Key>
+          <Property Name="RegID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MID" Type="Int32" />
+          <Property Name="PName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Weight" Type="Double" />
+          <Property Name="Occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnnualIncome" Type="Double" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Profile__MID__276EDEB3" FromRole="Profile" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Basic_Profile">
+          <Key>
+            <PropertyRef Name="DOB" />
+            <PropertyRef Name="District" />
+            <PropertyRef Name="Photo1" />
+          </Key>
+          <Property Name="MID" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Interest__FromId__2E1BDC42">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Interest">
+              <PropertyRef Name="FromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Interest__ToId__2F10007B">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Interest">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Preference__MID__32E0915F">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Preference" Type="Self.Preference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Preference">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profile__MID__276EDEB3">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EngineersMatrimonyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Interests" EntityType="Self.Interest" />
+          <EntitySet Name="Preferences" EntityType="Self.Preference" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="Basic_Profile" EntityType="Self.Basic_Profile" />
+          <AssociationSet Name="FK__Interest__FromId__2E1BDC42" Association="Self.FK__Interest__FromId__2E1BDC42">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Interest" EntitySet="Interests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Interest__ToId__2F10007B" Association="Self.FK__Interest__ToId__2F10007B">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Interest" EntitySet="Interests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Preference__MID__32E0915F" Association="Self.FK__Preference__MID__32E0915F">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Preference" EntitySet="Preferences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profile__MID__276EDEB3" Association="Self.FK__Profile__MID__276EDEB3">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EngineersMatrimonyModelStoreContainer" CdmEntityContainer="EngineersMatrimonyEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="EngineersMatrimonyModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EngineersMatrimonyModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Aid" ColumnName="Aid" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Interests">
+            <EntityTypeMapping TypeName="EngineersMatrimonyModel.Interest">
+              <MappingFragment StoreEntitySet="Interest">
+                <ScalarProperty Name="IntID" ColumnName="IntID" />
+                <ScalarProperty Name="FromId" ColumnName="FromId" />
+                <ScalarProperty Name="ToId" ColumnName="ToId" />
+                <ScalarProperty Name="MatchScore" ColumnName="MatchScore" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Preferences">
+            <EntityTypeMapping TypeName="EngineersMatrimonyModel.Preference">
+              <MappingFragment StoreEntitySet="Preference">
+                <ScalarProperty Name="PrefID" ColumnName="PrefID" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="AgeFrom" ColumnName="AgeFrom" />
+                <ScalarProperty Name="AgeTo" ColumnName="AgeTo" />
+                <ScalarProperty Name="HeightFrom" ColumnName="HeightFrom" />
+                <ScalarProperty Name="HeightTo" ColumnName="HeightTo" />
+                <ScalarProperty Name="WeightFrom" ColumnName="WeightFrom" />
+                <ScalarProperty Name="WeightTo" ColumnName="WeightTo" />
+                <ScalarProperty Name="Job" ColumnName="Job" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="FamilyType" ColumnName="FamilyType" />
+                <ScalarProperty Name="IncomeFrom" ColumnName="IncomeFrom" />
+                <ScalarProperty Name="IncomeTo" ColumnName="IncomeTo" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="EngineersMatrimonyModel.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="RegID" ColumnName="RegID" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="MStatus" ColumnName="MStatus" />
+                <ScalarProperty Name="Photo1" ColumnName="Photo1" />
+                <ScalarProperty Name="Photo2" ColumnName="Photo2" />
+                <ScalarProperty Name="Photo3" ColumnName="Photo3" />
+                <ScalarProperty Name="FamilyType" ColumnName="FamilyType" />
+                <ScalarProperty Name="AnnualIncome" ColumnName="AnnualIncome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Basic_Profile">
+            <EntityTypeMapping TypeName="EngineersMatrimonyModel.Basic_Profile">
+              <MappingFragment StoreEntitySet="Basic_Profile">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Photo1" ColumnName="Photo1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

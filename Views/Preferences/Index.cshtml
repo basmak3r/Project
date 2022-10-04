@@ -1,0 +1,111 @@
+﻿@model IEnumerable<EngineersMatrimony.Models.Preference>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AgeFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AgeTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeightFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeightTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeightFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeightTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaritalStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FamilyType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncomeFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IncomeTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.District)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgeTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeightFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeightTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeightFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeightTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaritalStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FamilyType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncomeFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IncomeTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.District)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.Username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PrefID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PrefID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PrefID })
+        </td>
+    </tr>
+}
+
+</table>
