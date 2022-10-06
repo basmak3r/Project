@@ -19,7 +19,7 @@ namespace EngineersMatrimony.Controllers
         {
             return View(db.Accounts.ToList());
         }
-
+      
         // GET: Accounts/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +34,35 @@ namespace EngineersMatrimony.Controllers
             }
             return View(account);
         }
+        [HttpGet]
+        // GET: SignIn
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SignIn(Account acc)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(acc);
+            }
+            else
+            {
+                Account acc1 = db.Accounts.SingleOrDefault(s => s.Username == acc.Username);
+                if (acc1.Username == acc.Username && acc1.Password == acc.Password)
+                {
+                    Session["UserId"] = Guid.NewGuid().ToString();
+                    return RedirectToAction("Create", "Profiles");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "SignIn Failed");
+                    return View(acc);
+                }
+            }
 
+        }
         // GET: Accounts/Create
         public ActionResult Create()
         {
