@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EngineersMatrimony.Models;
+using EngineersMatrimony.Filters;
 
 namespace EngineersMatrimony.Controllers
 {
+    [UserAuth]
     public class InterestsController : Controller
     {
         private EngineersMatrimonyEntities db = new EngineersMatrimonyEntities();

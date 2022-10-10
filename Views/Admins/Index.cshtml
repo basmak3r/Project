@@ -1,39 +1,127 @@
-﻿@model IEnumerable<EngineersMatrimony.Models.Admin>
+﻿@model IEnumerable<EngineersMatrimony.Models.Profile>
+
 
 @{
     ViewBag.Title = "Index";
+
+    Layout = "~/Views/Shared/_ProfilesLayout.cshtml";
+
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Aid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Aid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Aid })
-        </td>
-    </tr>
+@foreach (var item in Model)
+{
+
+
+    <div class="container rounded bg-white mt-4 mb-2">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" width="150px" src=@Html.DisplayFor(modelItem=>item.Photo1)>
+                    <div class="row">
+
+                        @if (item.Account.Status == 4)
+                        {
+                            <span class="col-md-5" style="display:inline">
+                                <button type="button" class="btn btn-outline-danger m-1" onclick="location.href='@Url.Action("Decline", "Admins", item.Account)'"> Deactivate </button>
+                            </span>
+                        }
+                        else if (item.Account.Status == -1 || item.Account.Status == 3)
+                        {
+                            <span class="col-md-5" style="display:inline">
+                                <button type="button" class="btn btn-outline-success m-1" onclick="location.href='@Url.Action("Accept", "Admins", item.Account)'"> Activate</button>
+
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="col-md-5" style="display:inline">
+                                <button type="button" class="btn btn-outline-success m-1"> Incomplete</button>
+                            </span>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Name:</label>            @Html.DisplayFor(modelItem => item.PName)
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Birthday:</label>            @Html.DisplayFor(modelItem => item.DOB)
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels">District:</label>            @Html.DisplayFor(modelItem => item.District)
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Mobile Number:</label>            @Html.DisplayFor(modelItem => item.Phone)
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="labels">Email ID:</label>            @Html.DisplayFor(modelItem => item.Email)
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="labels">Education:</label>            @Html.DisplayFor(modelItem => item.Education)
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labels">Occupation:</label>            @Html.DisplayFor(modelItem => item.Occupation)
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labels">Annual Income:</label>            @Html.DisplayFor(modelItem => item.AnnualIncome)
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Marital Status:</label>            @Html.DisplayFor(modelItem => item.MStatus)
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="labels">Gender:</label>            @Html.DisplayFor(modelItem => item.Gender)
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="labels">Height:</label>            @Html.DisplayFor(modelItem => item.Height)
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="labels">Weight:</label>            @Html.DisplayFor(modelItem => item.Weight)
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+
+   <hr />
+
 }
 
-</table>
+
+
+
+

@@ -88,7 +88,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
           <Property Name="District" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Photo1" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Interest__FromId__2E1BDC42">
+        <Association Name="FK__Interest__FromId__2B3F6F97">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -102,7 +102,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Interest__ToId__2F10007B">
+        <Association Name="FK__Interest__ToId__2C3393D0">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,7 +114,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Preference__MID__32E0915F">
+        <Association Name="FK__Preference__MID__300424B4">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -156,15 +156,15 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
     [Basic_Profile].[Photo1] AS [Photo1]
     FROM [dbo].[Basic_Profile] AS [Basic_Profile]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Interest__FromId__2E1BDC42" Association="Self.FK__Interest__FromId__2E1BDC42">
+          <AssociationSet Name="FK__Interest__FromId__2B3F6F97" Association="Self.FK__Interest__FromId__2B3F6F97">
             <End Role="Account" EntitySet="Account" />
             <End Role="Interest" EntitySet="Interest" />
           </AssociationSet>
-          <AssociationSet Name="FK__Interest__ToId__2F10007B" Association="Self.FK__Interest__ToId__2F10007B">
+          <AssociationSet Name="FK__Interest__ToId__2C3393D0" Association="Self.FK__Interest__ToId__2C3393D0">
             <End Role="Account" EntitySet="Account" />
             <End Role="Interest" EntitySet="Interest" />
           </AssociationSet>
-          <AssociationSet Name="FK__Preference__MID__32E0915F" Association="Self.FK__Preference__MID__32E0915F">
+          <AssociationSet Name="FK__Preference__MID__300424B4" Association="Self.FK__Preference__MID__300424B4">
             <End Role="Account" EntitySet="Account" />
             <End Role="Preference" EntitySet="Preference" />
           </AssociationSet>
@@ -186,9 +186,9 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
           <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Interests" Relationship="Self.FK__Interest__FromId__2E1BDC42" FromRole="Account" ToRole="Interest" />
-          <NavigationProperty Name="Interests1" Relationship="Self.FK__Interest__ToId__2F10007B" FromRole="Account" ToRole="Interest" />
-          <NavigationProperty Name="Preferences" Relationship="Self.FK__Preference__MID__32E0915F" FromRole="Account" ToRole="Preference" />
+          <NavigationProperty Name="Interests" Relationship="Self.FK__Interest__FromId__2B3F6F97" FromRole="Account" ToRole="Interest" />
+          <NavigationProperty Name="Interests1" Relationship="Self.FK__Interest__ToId__2C3393D0" FromRole="Account" ToRole="Interest" />
+          <NavigationProperty Name="Preferences" Relationship="Self.FK__Preference__MID__300424B4" FromRole="Account" ToRole="Preference" />
           <NavigationProperty Name="Profiles" Relationship="Self.FK__Profile__MID__276EDEB3" FromRole="Account" ToRole="Profile" />
         </EntityType>
         <EntityType Name="Admin">
@@ -208,8 +208,8 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
           <Property Name="ToId" Type="Int32" />
           <Property Name="MatchScore" Type="Int32" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Interest__FromId__2E1BDC42" FromRole="Interest" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK__Interest__ToId__2F10007B" FromRole="Interest" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Interest__FromId__2B3F6F97" FromRole="Interest" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK__Interest__ToId__2C3393D0" FromRole="Interest" ToRole="Account" />
         </EntityType>
         <EntityType Name="Preference">
           <Key>
@@ -230,7 +230,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
           <Property Name="IncomeTo" Type="Double" />
           <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK__Preference__MID__32E0915F" FromRole="Preference" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Preference__MID__300424B4" FromRole="Preference" ToRole="Account" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -267,7 +267,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
           <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Photo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Interest__FromId__2E1BDC42">
+        <Association Name="FK__Interest__FromId__2B3F6F97">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -281,7 +281,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Interest__ToId__2F10007B">
+        <Association Name="FK__Interest__ToId__2C3393D0">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
           <End Role="Interest" Type="Self.Interest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -293,7 +293,7 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Preference__MID__32E0915F">
+        <Association Name="FK__Preference__MID__300424B4">
           <End Role="Account" Type="Self.Account" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -328,15 +328,15 @@ warning 6002: The table/view 'EngineersMatrimony.dbo.Basic_Profile' does not hav
           <EntitySet Name="Preferences" EntityType="Self.Preference" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
           <EntitySet Name="Basic_Profile" EntityType="Self.Basic_Profile" />
-          <AssociationSet Name="FK__Interest__FromId__2E1BDC42" Association="Self.FK__Interest__FromId__2E1BDC42">
+          <AssociationSet Name="FK__Interest__FromId__2B3F6F97" Association="Self.FK__Interest__FromId__2B3F6F97">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Interest" EntitySet="Interests" />
           </AssociationSet>
-          <AssociationSet Name="FK__Interest__ToId__2F10007B" Association="Self.FK__Interest__ToId__2F10007B">
+          <AssociationSet Name="FK__Interest__ToId__2C3393D0" Association="Self.FK__Interest__ToId__2C3393D0">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Interest" EntitySet="Interests" />
           </AssociationSet>
-          <AssociationSet Name="FK__Preference__MID__32E0915F" Association="Self.FK__Preference__MID__32E0915F">
+          <AssociationSet Name="FK__Preference__MID__300424B4" Association="Self.FK__Preference__MID__300424B4">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Preference" EntitySet="Preferences" />
           </AssociationSet>

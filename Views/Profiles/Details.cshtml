@@ -2,153 +2,87 @@
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CardLayout.cshtml";
+
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Profile</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PName)
-        </dd>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="250px" src=@Html.DisplayFor(model=>model.Photo1)><span class="font-weight-bold">@Html.DisplayFor(model=>model.PName)</span><span class="text-black-50">@Html.DisplayFor(model=>model.Email)</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right mt-5">
+            <div class="p-3 py-5">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <label class="labels">Name:</label>            @Html.DisplayFor(model => model.PName)
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <label class="labels">Birthday:</label>            @Html.DisplayFor(model => model.DOB)
+                    </div>
+                    <div class="col-md-6">
+                        <label class="labels">District:</label>            @Html.DisplayFor(model => model.District)
+                    </div>
+                </div>
+                <hr />
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <label class="labels">Mobile Number:</label>            @Html.DisplayFor(model => model.Phone)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
+                    <div class="col-md-6">
+                        <label class="labels">Email ID:</label>            @Html.DisplayFor(model => model.Email)
+                    </div>
+                </div>
+                <hr />
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <label class="labels">Education:</label>            @Html.DisplayFor(model => model.Education)
+                    </div>
+                    <div class="col-md-4">
+                        <label class="labels">Occupation:</label>            @Html.DisplayFor(model => model.Occupation)
+                    </div>
+                    <div class="col-md-4">
+                        <label class="labels">Annual Income:</label>            @Html.DisplayFor(model => model.AnnualIncome)
+                    </div>
+                </div>
+                <hr />
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <label class="labels">Marital Status:</label>            @Html.DisplayFor(model => model.MStatus)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
+                    <div class="col-md-6">
+                        <label class="labels">Gender:</label>            @Html.DisplayFor(model => model.Gender)
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <label class="labels">Height:</label>            @Html.DisplayFor(model => model.Height)
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Education)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Education)
-        </dd>
+                    <div class="col-md-6">
+                        <label class="labels">Weight:</label>            @Html.DisplayFor(model => model.Weight)
+                    </div>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.District)
-        </dt>
+              
 
-        <dd>
-            @Html.DisplayFor(model => model.District)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Weight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Weight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Occupation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Occupation)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FamilyType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FamilyType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AnnualIncome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AnnualIncome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Account.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Account.Username)
-        </dd>
-
-    </dl>
+            </div>
+        </div>
+      
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RegID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

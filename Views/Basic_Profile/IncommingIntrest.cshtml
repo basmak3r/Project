@@ -1,0 +1,88 @@
+﻿@model IEnumerable<EngineersMatrimony.Models.Basic_Profile>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CardLayout.cshtml";
+
+}
+
+
+
+
+
+
+@*<div class="row">
+        @foreach (var item in Model)
+        {
+            if (ViewBag.intrestedIds.Contains((int)item.MID))
+            {
+                <div class="col-lg-4">
+                    <div class="card bg-info" style="width: 18rem;">
+                        <img src=@item.Photo1 class="card-img-top" alt="..." width="100%" height="100px">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.MID)</h5>
+                            <p>
+                                @{
+                                    var date = DateTime.Now.Date.Subtract(item.DOB);
+                                    int age = (int)date.TotalDays / 365;
+                                    @Html.DisplayTextFor(model => age);
+                                }
+                            </p>
+                            <p>
+                                Score: @ViewBag.MidScoreMap[(int)item.MID]
+                            </p>
+                            <p>@Html.DisplayFor(modelItem => item.District)</p>
+                            <button class="btn" onclick="location.href='@Url.Action("Decline", "Basic_Profile",item)'">Decline</button>
+                            <button class="btn" onclick="location.href='@Url.Action("Accept", "Basic_Profile",item)'">Accept</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>*@
+
+<div class="card-body">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            //if (!(ViewBag.intrestedIds.Contains((int)item.MID)))
+            //{
+
+            <section class="col bg-faded container-fluid">
+
+                <div class="card profile-card" style="width:15rem;">
+                    <figure style="height:250px">
+                        <input id="fab" type="checkbox" class="fab"><label for="fab" class="toggle" style="background-color:forestgreen" onclick="location.href='@Url.Action("Accept", "Basic_Profile",item)'">+</label>
+                        <input id="fab1" type="checkbox" class="fab1"><label for="fab1" class="toggle" style="background-color:darkred" onclick="location.href='@Url.Action("Decline", "Basic_Profile",item)'">-</label>
+                        <img src=@item.Photo1 class="img-fluid img-profile" alt="Card image" height="300" width="400">
+
+                    </figure>
+                    <div class="card-block text-xs-center">
+                        <p class="h4 card-title font-weight-bold">@Html.DisplayFor(modelItem => item.MID)</p>
+                        <p class="h6 card-subtitle text-muted">
+                            @{
+                                var date = DateTime.Now.Date.Subtract(item.DOB);
+                                int age = (int)date.TotalDays / 365;
+                                @Html.DisplayTextFor(model => age);
+                            }
+                            |
+                            <span>@Html.DisplayFor(modelItem => item.District)</span>
+                            @*<p class="h6 card-subtitle text-muted">
+                                    score: @ViewBag.MidScoreMap[(int)item.MID]
+                                </p>*@
+
+
+
+
+
+
+                    </div>
+            </section>
+            @*}*@
+        }
+    </div>
+</div>
+
+
+

@@ -1,0 +1,204 @@
+﻿@import "https://fonts.googleapis.com/css?family=Muli";
+
+* {
+    font-family: "Muli",sans-serif;
+}
+
+.card.profile-card {
+    box-shadow: 0px 0px 20px #DFDFDF;
+    border: none;
+    border-radius: 0;
+}
+
+input.fab {
+    display: none
+}
+input.fab1 {
+    display: none
+}
+
+
+figure {
+    overflow: hidden
+}
+
+.img-profile {
+    -webkit-clip-path: circle(52% at 70% 38%);
+    -moz-clip-path: circle(52% at 70% 38%);
+    clip-path: circle(52% at 70% 38%);
+    transform: translatez(0);
+    transition: all .3s linear;
+}
+
+    .img-profile:hover {
+        -webkit-clip-path: circle(30% at 50% 50%);
+        clip-path: circle(30% at 50% 50%);
+        transform: scale(1.07) rotate(-5deg) translatez(0);
+    }
+
+.profile-card .fab + .toggle {
+    top: 63%;
+    z-index: 10;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 60px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    color: #fff;
+    background: #F44336;
+    -webkit-user-select: none;
+    box-shadow: 0 4px 4px #666;
+    transition: all 0.3s ease-in-out 0s;
+}
+.profile-card .fab1 + .toggle {
+    top: 63%;
+    z-index: 10;
+    right: 22%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 60px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    color: #fff;
+    background: #F44336;
+    -webkit-user-select: none;
+    box-shadow: 0 4px 4px #666;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.fab:checked + .toggle {
+    color: #fff;
+    background: #F44336;
+    transform: rotate(135deg);
+    box-shadow: 2px -2px 4px #333;
+    transition: all 0.3s ease-in-out 0s;
+}
+.fab1:checked + .toggle {
+    color: #fff;
+    background: #F44336;
+    transform: rotate(135deg);
+    box-shadow: 2px -2px 4px #333;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+
+.form-style-10 h1 {
+    background: #905E96;
+    padding: 2%;
+    margin-bottom: 2%;
+    border-radius: 10px 10px 0 0;
+    -webkit-border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font: normal 30px 'Bitter', serif;
+    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+    border: 1px solid #257C9E;
+}
+
+    .form-style-10 h1 > span {
+        display: block;
+        margin: 2px;
+        font: 13px Arial, Helvetica, sans-serif;
+    }
+
+.navbar {
+    background-color: #905E96;
+    margin:1%;
+}
+/* Color of the links BEFORE scroll */
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+    color: #fff;
+}
+
+/* Color of the links AFTER scroll */
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scrolled .navbar-brand {
+    color: #fff;
+}
+
+/* Color of the navbar AFTER scroll */
+.navbar-scroll,
+.navbar-scrolled {
+    background-color: #cbbcb1;
+}
+
+
+.navbar-brand {
+    font-size: 1.75rem;
+    letter-spacing: 3px;
+}
+.card-body {
+    margin: 1%;
+    margin-top:5%;
+    
+  
+}
+.nav-link a{
+    text-decoration:none;
+    color:black;
+}
+
+
+
+
+
+
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+    .profile-button:hover {
+        background: #682773
+    }
+
+    .profile-button:focus {
+        background: #682773;
+        box-shadow: none
+    }
+
+    .profile-button:active {
+        background: #682773;
+        box-shadow: none
+    }
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+button{
+
+
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}

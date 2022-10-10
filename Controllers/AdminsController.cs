@@ -7,153 +7,79 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EngineersMatrimony.Models;
+using EngineersMatrimony.Filters;
+
 
 namespace EngineersMatrimony.Controllers
 {
+    
     public class AdminsController : Controller
     {
         private EngineersMatrimonyEntities db = new EngineersMatrimonyEntities();
 
-        // GET: Admins
+
+
 
         [HttpGet]
-        // GET: SignIn
-        public ActionResult SignIn()
+        public ActionResult Login()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult SignIn(Admin admin)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(admin);
-            }
-            else
-            {
-                if (admin.Username == "admin" && admin.Password == "admin")
-                {
-                    Session["UserId"] = Guid.NewGuid().ToString();
-                    return RedirectToAction("Index", "Profiles");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "SignIn Failed");
-                    return View(admin);
-                }
-            }
 
+
+
+        [HttpPost]
+        public ActionResult Login(Admin admin)
+        {
+
+
+            Admin s1 = db.Admins.SingleOrDefault(s => s.Username == admin.Username);
+            if (s1 != null)
+            {
+                if (s1.Username == admin.Username && admin.Password == s1.Password)
+                {
+                    Session["Uname"] = s1.Username;
+                    return RedirectToAction("Index");
+                }
+            }
+            return View();
         }
+
+        public ActionResult Logout()
+        {
+            Session["Uname"] = "";
+            return RedirectToAction("Login", "Admins");
+        }
+
+        // GET: Admins
+        [AdminAuth]
         public ActionResult Index()
         {
-            
-            return View(db.Admins.ToList());
-        }
-        
-        
-
-        // GET: Admins/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
+            return View(db.Profiles.ToList().OrderByDescending(p=>p.MID).ToList());
         }
 
-        // GET: Admins/Create
-        public ActionResult Create()
+
+
+        public ActionResult Accept(Account acc)
         {
-            return View();
+            Account s1 = db.Accounts.SingleOrDefault(s => s.Username == acc.Username);
+            s1.Status = 4;
+            db.Entry(s1).State = EntityState.Modified;
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-
-        // POST: Admins/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Aid,Username,Password")] Admin admin)
+        public ActionResult Decline(Account acc)
         {
-            if (ModelState.IsValid)
-            {
-                db.Admins.Add(admin);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Account s1 = db.Accounts.SingleOrDefault(s => s.Username == acc.Username);
+            s1.Status = -1;
+            db.Entry(s1).State = EntityState.Modified;
 
-            return View(admin);
-        }
-
-        // GET: Admins/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
-        }
-
-        // POST: Admins/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Aid,Username,Password")] Admin admin)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(admin).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(admin);
-        }
-
-        // GET: Admins/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Admin admin = db.Admins.Find(id);
-            if (admin == null)
-            {
-                return HttpNotFound();
-            }
-            return View(admin);
-        }
-
-        // POST: Admins/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Admin admin = db.Admins.Find(id);
-            db.Admins.Remove(admin);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
+
     }
 }

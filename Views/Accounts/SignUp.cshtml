@@ -1,7 +1,7 @@
 ﻿@model EngineersMatrimony.Models.Account
 
 @{
-    ViewBag.Title = "SignIn";
+    ViewBag.Title = "SignUp";
     Layout = "~/Views/Shared/_SignInLayout.cshtml";
 }
 
@@ -14,12 +14,12 @@
             <div class="col-left">
                 <div class="login-text">
                     <h2>Engineers Matrimony</h2>
-                    <p>Create your account.<br>For Free!</p>
-                    
+                    <p>Have an account?</p>
+
                     <div class="btn">
-                        @Html.ActionLink("Sign Up", "SignUp", "Accounts")
+                        @Html.ActionLink("Sign In", "SignIn", "Accounts")
                     </div>
-                  
+
                 </div>
             </div>
 
@@ -38,7 +38,11 @@
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                         </p>
                         <p>
-                            <input type="submit" value="Sign In" class="btn btn-default" />
+                            <label>Confirm Password<span>*</span></label>
+                            <input type="password" name="Cpassword" id="Cpassword"  />
+                        </p>
+                        <p>
+                            <input type="submit" value="Sign Up" class="btn btn-default" />
 
                         </p>
                         <p>
@@ -55,7 +59,5 @@
 
 
 }
-
-
 
 

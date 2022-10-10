@@ -5,19 +5,23 @@
     Layout = "~/Views/Shared/_CardLayout.cshtml";
 
 }
+
+
+
 <div class="card-body">
     <div class="row">
 
+
         @foreach (var item in Model)
         {
-            if (!(ViewBag.intrestedIds.Contains((int)item.MID)))
-            {
+            //if (!(ViewBag.intrestedIds.Contains((int)item.MID)))
+            //{
 
-            <section class="col bg-faded container">
+            <section class="col bg-faded container-fluid">
 
                 <div class="card profile-card" style="width:15rem;">
                     <figure style="height:250px">
-                        <input id="fab" type="checkbox" class="fab"><label for="fab" class="toggle" style="background-color:forestgreen" onclick="location.href='@Url.Action("Intrested", "Basic_Profile",item)'">+</label>
+                        <input id="fab" type="checkbox" class="fab"><label for="fab" class="toggle" style="background-color:darkred" onclick="location.href='@Url.Action("UnIntrested", "Basic_Profile",item)'">-</label>
                         <img src=@item.Photo1 class="img-fluid img-profile" alt="Card image" height="300" width="400">
 
                     </figure>
@@ -31,6 +35,9 @@
                             }
                             |
                             <span>@Html.DisplayFor(modelItem => item.District)</span>
+                            @*<p class="h6 card-subtitle text-muted">
+                                    Score: @ViewBag.MidScoreMap[(int)item.MID]
+                                </p>*@
 
 
 
@@ -39,10 +46,9 @@
 
                     </div>
             </section>
-            }
+            @*  *@}
         }
     </div>
-
 </div>
 
 

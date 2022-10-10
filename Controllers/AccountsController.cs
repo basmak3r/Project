@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EngineersMatrimony.Models;
+using EngineersMatrimony.Filters;
 
 namespace EngineersMatrimony.Controllers
 {
+    
     public class AccountsController : Controller
     {
         private EngineersMatrimonyEntities db = new EngineersMatrimonyEntities();
@@ -50,10 +52,53 @@ namespace EngineersMatrimony.Controllers
             else
             {
                 Account acc1 = db.Accounts.SingleOrDefault(s => s.Username == acc.Username);
-                if (acc1.Username == acc.Username && acc1.Password == acc.Password)
+                if (acc1 != null)
                 {
-                    Session["UserId"] = Guid.NewGuid().ToString();
-                    return RedirectToAction("Create", "Profiles");
+                    if (acc1.Username == acc.Username && acc1.Password == acc.Password)
+                    {
+
+                        Session["MID"] = acc1.MID;
+                        if (acc1.Status == -1)
+                        {
+                            ModelState.AddModelError("", "Your Account is Deactivated!!");
+                            return View(acc);
+                        }
+                        else if (acc1.Status == 0)
+                        {
+                            return RedirectToAction("Create", "Profiles");
+                        }
+                        else if (acc1.Status==1)
+                        {
+                            return RedirectToAction("UploadFile", "Upload");
+
+                        }
+                        else if(acc1.Status==2)
+                        {
+                            return RedirectToAction("Create", "Preferences");
+
+                        }
+                        else if (acc1.Status==3)
+                        {
+                            ModelState.AddModelError("","Awaiting Activation! Try again later.");
+                            return View(acc);
+
+                        }
+                        else if(acc1.Status==4)
+                        {
+                            return RedirectToAction("Index", "Basic_Profile");
+
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "SignIn Failed");
+                            return View(acc);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "SignIn Failed");
+                        return View(acc);
+                    }
                 }
                 else
                 {
@@ -63,6 +108,58 @@ namespace EngineersMatrimony.Controllers
             }
 
         }
+        public ActionResult Logout()
+        {
+            Session["MID"] = "";
+            return RedirectToAction("SignIn","Accounts");
+        }
+        [HttpGet]
+        // GET: Accounts/Create
+        public ActionResult SignUp()
+        {
+            return View();
+        }
+
+        // POST: Accounts/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp([Bind(Include = "MID,Username,Password,Status")] Account account,String Cpassword)
+        {
+            if (ModelState.IsValid)
+            {
+                Account acc1 = db.Accounts.SingleOrDefault(s => s.Username == account.Username);
+                if (acc1 == null)
+                {
+                    if (account.Password == Cpassword)
+                    {
+                        db.Accounts.Add(account);
+                        db.SaveChanges();
+                        return RedirectToAction("SignIn", "Accounts");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Passwords Mismatch!");
+                        return View(account);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Username already exists");
+                    return View(account);
+                }
+
+            }
+
+
+
+            return View(account);
+
+            return View(account);
+        }
+
+        [HttpGet]
         // GET: Accounts/Create
         public ActionResult Create()
         {
